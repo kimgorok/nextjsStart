@@ -1,6 +1,9 @@
 body {
   background-color: black;
   color: white;
+  margin: 0;
+  margin-top: 150px;
+  margin-bottom: 150px;
 }
 
 a {

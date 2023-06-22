@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 export default function NavBar() {
   return (
-    <nav>
+    <nav className={"navBar"}>
       <div className={"container"}>
         <Link legacyBehavior href="/">
           <a className={"home"}>Home</a>
@@ -14,13 +14,22 @@ export default function NavBar() {
       </div>
 
       <style jsx>{`
-        nav {
+        .navBar {
+          width: 100%;
+          position: fixed;
+          top: 0;
+          background-color: black;
           border-bottom: 5px solid #f3ffac;
+          z-index: 1;
+          box-sizing: border-box;
+          padding: 20px;
         }
 
         .container {
+          font-size: 2rem;
           display: flex;
-          justify-content: space-between;
+
+          margin-bottom: 10px;
         }
         .home {
           margin-right: auto;

@@ -1,8 +1,6 @@
 import { useRouter } from "next/router";
 import Seo from "@/Components/Seo";
 
-// https://books-api.nomadcoders.workers.dev/
-
 export default function IndexPage({ results }) {
   const router = useRouter();
 
@@ -11,10 +9,10 @@ export default function IndexPage({ results }) {
   };
 
   return (
-    <div className={"maincontainer"}>
+    <div className={"mainContainer"}>
       <Seo title="Home" />
       {!results && <h1>로딩중...</h1>}
-      <h1>THE NEW YORK TIMES BEST SELLER EXPLORER</h1>
+      <h1 className={"title"}>THE NEW YORK TIMES BEST SELLER EXPLORER</h1>
 
       {results?.map((bookList) => (
         <span
@@ -26,14 +24,23 @@ export default function IndexPage({ results }) {
         </span>
       ))}
       <style jsx>{`
-        .maincontainer {
+        .mainContainer {
           left: 0;
           right: 0;
           margin: auto;
-          max-width: 70%;
+          max-width: 65%;
+        }
+        .title {
+          font-size: 3rem;
         }
         .bookList {
-          display: flex;
+          font-size: 1.3rem;
+          cursor: pointer;
+          border: 2px solid #ffffff;
+          border-radius: 20px;
+          padding: 0px 30px;
+          margin: 20px;
+          display: inline-block;
         }
       `}</style>
     </div>
