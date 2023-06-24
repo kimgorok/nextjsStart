@@ -1,71 +1,75 @@
-export default function Detail({ results, id }) {
+import styles from "/Components/IdCSS.module.css";
+import { motion } from "framer-motion";
+import Seo from "@/Components/Seo";
+
+export default function Detail({ results }) {
   return (
-    <div className={"listContainer"}>
+    <div className={styles.listContainer}>
+      <Seo title={results.list_name} />
       {!results && <h1>로딩중...</h1>}
-      <h1 className={"bookTitle"}>{results.list_name} Books</h1>
-      <div className={"bookList"}>
-        {results?.books?.map((book) => (
-          <div className={"bookCard"} key={book.rank}>
+      <h1 className={styles.bookTitle}>{results.list_name} Books</h1>
+      <div className={styles.bookList}>
+        {results?.books?.map((book, index) => (
+          <motion.div
+            className={styles.bookCard}
+            key={book.rank}
+            variants={DetailListVariants}
+            initial="hidden"
+            animate="visible"
+            custom={index}
+            whileHover="hover"
+          >
             <img
+              alt="이미지 없음"
               src={`https://storage.googleapis.com/du-prd/books/images/${book.primary_isbn13}.jpg`}
             />
             <h1>{book.title}</h1>
-            <h3 className={"authorName"}>{book.author}</h3>
-            <div className={"buyNowButton"}>
+            <h3 className={styles.authorName}>
+              by {book.author} | {book.publisher}
+            </h3>
+            <motion.div
+              className={styles.buyNowButton}
+              variants={BuyNowVariants}
+              whileHover="hover"
+            >
               <a href={`${book.amazon_product_url}`} target="_blank">
                 Buy Now &rarr;
               </a>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         ))}
       </div>
-      <style jsx>{`
-        .listContainer {
-          margin: auto;
-          max-width: 80%;
-          text-align: center;
-        }
-
-        .bookTitle {
-          margin: 50px;
-        }
-
-        .bookList {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          grid-gap: 50px;
-        }
-
-        .bookCard {
-          border-bottom: 1px solid #f3ffac;
-          padding-bottom: 20px;
-        }
-        .bookCard img {
-          position: relative;
-          width: 323px;
-          height: 500px;
-        }
-
-        .bookCard img:hover {
-          transform: translateY(-15px);
-        }
-
-        .authorName {
-          font-size: 1.3rem;
-          color: #4dd5ff;
-        }
-
-        .buyNowButton {
-          font-size: 1.5rem;
-          background-color: black;
-          border: 2px solid #ffffff;
-          padding: 5px 30px;
-          display: inline-block;
-        }
-      `}</style>
     </div>
   );
 }
+
+export const DetailListVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0,
+  },
+  visible: (index) => ({
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delay: index * 0.07,
+    },
+  }),
+  hover: {
+    x: 10,
+    y: 15,
+    boxShadow: 0,
+  },
+};
+
+export const BuyNowVariants = {
+  hover: {
+    scale: 1.2,
+    transition: {
+      duration: 0.1,
+    },
+  },
+};
 
 export async function getServerSideProps({ params: { id } }) {
   const { results } = await (

@@ -2,14 +2,15 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function NavBar() {
+  const router = useRouter();
   return (
     <nav className={"navBar"}>
       <div className={"container"}>
         <Link legacyBehavior href="/">
-          <a className={"home"}>Home</a>
+          <a className={router.pathname === "/" ? "active" : ""}>Home</a>
         </Link>
         <Link legacyBehavior href="/about">
-          <a className={"about"}>About</a>
+          <a className={router.pathname === "/about" ? "active" : ""}>About</a>
         </Link>
       </div>
 
@@ -28,14 +29,14 @@ export default function NavBar() {
         .container {
           font-size: 2rem;
           display: flex;
-
           margin-bottom: 10px;
+          justify-content: space-around;
         }
-        .home {
-          margin-right: auto;
+        .a {
+          text-decoration: none;
         }
-        .about {
-          margin-left: auto;
+        .active {
+          color: #09ff00;
         }
       `}</style>
     </nav>

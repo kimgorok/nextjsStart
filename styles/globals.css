@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
+
 body {
-  background-color: black;
-  color: white;
+  background-color: rgb(241, 241, 241);
+  color: black;
   margin: 0;
   margin-top: 150px;
   margin-bottom: 150px;
+  font-family: "Bree Serif", serif;
 }
 
 a {
