@@ -9,6 +9,7 @@ export default function NavBar() {
         <Link legacyBehavior href="/">
           <a className={router.pathname === "/" ? "active" : ""}>Home</a>
         </Link>
+        <img src="/favicon.ico" style={{ width: 50, height: 50 }} />
         <Link legacyBehavior href="/about">
           <a className={router.pathname === "/about" ? "active" : ""}>About</a>
         </Link>
@@ -30,7 +31,7 @@ export default function NavBar() {
           font-size: 2rem;
           display: flex;
           margin-bottom: 10px;
-          justify-content: space-around;
+          justify-content: space-evenly;
         }
         .a {
           text-decoration: none;

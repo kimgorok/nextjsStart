@@ -3,9 +3,10 @@ import Seo from "@/Components/Seo";
 import { motion } from "framer-motion";
 import styles from "../Components/IndexCSS.module.css";
 
+// getServerSideProp에서 받은 fetch한 데이터가 들은 results prop
 export default function IndexPage({ results }) {
   const router = useRouter();
-
+  // id를 prop으로 받아 router.push로 /list/id로 링크 이동하도록 함
   const onClick = (id) => {
     router.push(`/list/${id}`);
   };
@@ -13,7 +14,7 @@ export default function IndexPage({ results }) {
   return (
     <div className={styles.mainContainer}>
       <Seo title="Home" />
-      {!results && <h1>로딩중...</h1>}
+
       <h1 className={styles.title}>THE NEW YORK TIMES BEST SELLER EXPLORER</h1>
 
       {results?.map((bookList, index) => (
@@ -64,12 +65,14 @@ export const BookListVariants = {
       "rgb(100,0,255)",
     ],
     transition: {
-      duration: 3,
+      duration: 1,
       ease: "easeInOut",
     },
   },
 };
 
+// 서버에서 실행. client에게 보이지 않음
+// 여기서 무엇을 return하던지 그 값을 props로써 page에게 줌
 export async function getServerSideProps() {
   const { results } = await (
     await fetch(`https://books-api.nomadcoders.workers.dev/lists`)

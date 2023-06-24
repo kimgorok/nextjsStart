@@ -2,11 +2,12 @@ import styles from "/Components/IdCSS.module.css";
 import { motion } from "framer-motion";
 import Seo from "@/Components/Seo";
 
+// pages안의 list 폴더 안의 [id].js로 이 링크로 가려면
+// home/list/[id]로 이동함
 export default function Detail({ results }) {
   return (
     <div className={styles.listContainer}>
       <Seo title={results.list_name} />
-      {!results && <h1>로딩중...</h1>}
       <h1 className={styles.bookTitle}>{results.list_name} Books</h1>
       <div className={styles.bookList}>
         {results?.books?.map((book, index) => (
